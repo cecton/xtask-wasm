@@ -222,4 +222,28 @@ This command will run the code in `examples/run_example` using the development s
 * `run-example`: a helper to run examples from `examples/` directory using a development
     server.
 
+## Troubleshooting
+
+Troubleshooting
+
+When using the re-export of clap, you might encounter this error:
+
+```console
+error[E0433]: failed to resolve: use of undeclared crate or module `clap`
+  --> xtask/src/main.rs:12:10
+   |
+12 | #[derive(Parser)]
+   |          ^^^^^^ not found in `clap`
+   |
+  = note: this error originates in the derive macro `Parser` (in Nightly builds, run with -Z macro-backtrace for more info)
+```
+
+You need to import xtask_wasm::clap directly, like this:
+
+```rust
+use xtask_wasm::clap;
+
+#[derive(clap::Parser)]
+```
+
 <!-- cargo-rdme end -->
